@@ -6,7 +6,7 @@ export const CalendarApp = () => {
   return (
     <BrowserRouter>
       <AppRouter/>
-    </BrowserRouter>
+   </BrowserRouter>
       
   
   )
