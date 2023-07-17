@@ -27,7 +27,7 @@ export const useUiStore = () => {
 
     return {
       // propiedades
-      isDateModalOpen,
+    isDateModalOpen,
 
       // metodos
       closeDateModal,
