@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { addHours } from 'date-fns/esm';
 
 const tempEvent =  {
+  _id:new Date().getTime(),
     title:'cumple del jefe',
     notes:'hay que comprar el pastel',
     start:new Date(),
@@ -24,12 +25,13 @@ name: 'calendar',
   activeEvent:null
  }, 
  reducers: { 
-  increment: (state, /* action */ ) => { 
-  state.counter += 1;
-   }, 
+  onSetActiveEvent: (state, {payload})=> {
+    state.activeEvent = payload;
+
+  }
  } 
 });
 
 
 // Action creators are generated for each case reducer function
-export const { increment } = calendarSlice.actions;
+export const {  onSetActiveEvent} = calendarSlice.actions;

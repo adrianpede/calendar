@@ -10,7 +10,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import es from 'date-fns/locale/es';
 import { differenceInSeconds } from 'date-fns/esm';
 
-import { useUiStore } from '../../hooks';
+import { useCalendarStore, useUiStore } from '../../hooks';
+import { useEffect } from 'react';
 
 
 registerLocale('es', es)
@@ -31,14 +32,15 @@ const customStyles = {
 export const CalendarModal = () => {
   
     const { isDateModalOpen, closeDateModal} = useUiStore();
+    const {activeEvent} = useCalendarStore();
     
     const [formSubmitted, setFormSubmitted] = useState(false);
 
     const [formValues, setFormValues] = useState({
-      title: 'Adrián',
-      notes: 'Pedemonte',
+      title: '',
+      notes: '',
       start: new Date(),
-      end: addHours( new Date(), 2)
+      end: addHours( new Date(), 2),
     });
         
     const titleClass = useMemo(() => {
@@ -50,6 +52,15 @@ export const CalendarModal = () => {
       : 'is-invalid';
 
     }, [ formValues.title, formSubmitted ])
+
+    useEffect(() => {
+      if(activeEvent !== null) {
+        setFormValues({...activeEvent});
+      }
+    
+      
+    }, [activeEvent])
+    
 
     const onInputChanged = ({target}) => {
 
